@@ -1,10 +1,20 @@
 package io.egen.entity;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Timestamp;
 
+
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Reading.findAll",query = "select read from Reading read"),
+})
 public class Reading {
+    @Id
     private String vin;
     private double latitude;
     private double longitude;
@@ -16,6 +26,9 @@ public class Reading {
     private boolean engineCoolantLow;
     private boolean cruiseControlOn;
     private int engineRpm;
+
+    @Embedded
+    private Tires tires;
 
     public String getVin() {
         return vin;
@@ -103,5 +116,13 @@ public class Reading {
 
     public void setEngineRpm(int engineRpm) {
         this.engineRpm = engineRpm;
+    }
+
+    public Tires getTires() {
+        return tires;
+    }
+
+    public void setTires(Tires tires) {
+        this.tires = tires;
     }
 }

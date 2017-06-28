@@ -1,8 +1,8 @@
 package io.egen.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 
-@Entity
+@Embeddable
 public class Tires {
     private int frontLeft;
     private int frontRight;
