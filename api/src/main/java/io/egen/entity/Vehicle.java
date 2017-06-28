@@ -2,9 +2,19 @@ package io.egen.entity;
 
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import java.sql.Timestamp;
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Vehicle.findAll",query = "select veh from Vehicle veh"),
+        @NamedQuery(name = "Vehicle.findByModel",query = "select veh from Vehicle veh where veh.model=:paramModel")
+}
+)
 public class Vehicle {
+    @Id
     private String vin;
     private String make;
     private String model;
@@ -67,5 +77,18 @@ public class Vehicle {
 
     public void setLastServiceDate(Timestamp lastServiceDate) {
         this.lastServiceDate = lastServiceDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vin='" + vin + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", redlineRpm=" + redlineRpm +
+                ", maxFuelVolume=" + maxFuelVolume +
+                ", lastServiceDate=" + lastServiceDate +
+                '}';
     }
 }

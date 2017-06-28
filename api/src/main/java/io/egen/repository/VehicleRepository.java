@@ -16,4 +16,6 @@ public interface VehicleRepository {
     Vehicle update(Vehicle veh);
 
     void delete(Vehicle veh);
+
+
 }
