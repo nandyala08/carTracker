@@ -11,7 +11,7 @@ public interface VehicleService {
 
     Vehicle create(Vehicle veh);
 
-    Vehicle update(String vin, Vehicle veh);
+    Vehicle update(Vehicle veh);
 
     void delete(String vin);
 }

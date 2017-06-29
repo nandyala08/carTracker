@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://mocker.egen.io", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/vehicles")
 public class VehicleController {
@@ -42,14 +42,17 @@ public class VehicleController {
         return service.create(veh);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/{vin}",
+    @RequestMapping(method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Vehicle update(@PathVariable("vin") String vehId, @RequestBody Vehicle veh) {
-        System.out.println("CAME HERE!!!!!!!!!!!!!!!!!");
-        return service.update(vehId, veh);
-    }
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String update( @RequestBody List<Vehicle> veh) {
 
+        for (Vehicle vehicle : veh) {
+            service.update(vehicle);
+        }
+
+        return "";
+    }
     @RequestMapping(method = RequestMethod.DELETE, value = "/{vin}")
     public void delete(@PathVariable("vin") String vehId) {
         service.delete(vehId);
