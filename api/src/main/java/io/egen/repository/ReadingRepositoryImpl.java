@@ -2,6 +2,8 @@ package io.egen.repository;
 
 
 import io.egen.entity.Reading;
+import io.egen.service.AlertService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Repository
 public class ReadingRepositoryImpl implements ReadingRepository {
+
+    @Autowired
+    AlertService alertService;
     @PersistenceContext
     private EntityManager entityManager;
     public List<Reading> findAll() {
@@ -27,7 +32,9 @@ public class ReadingRepositoryImpl implements ReadingRepository {
     }
 
     public Reading create(Reading read) {
+
         entityManager.persist(read);
+
         return read;
     }
 

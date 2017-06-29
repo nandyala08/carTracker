@@ -2,9 +2,10 @@ package io.egen.service;
 
 
 import io.egen.entity.Reading;
+import io.egen.entity.Vehicle;
 import io.egen.exception.BadRequest;
-import io.egen.exception.ResourceNotFound;
 import io.egen.repository.ReadingRepository;
+import io.egen.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,12 @@ public class ReadingServiceImpl implements ReadingService{
 
     @Autowired
     ReadingRepository readingRepository;
+
+    @Autowired
+    VehicleRepository vehicleRepository;
+    @Autowired
+    AlertService alertService;
+
     @Transactional(readOnly = true)
     public List<Reading> findAll() {
 
@@ -32,7 +39,15 @@ public class ReadingServiceImpl implements ReadingService{
 
     @Transactional
     public Reading create(Reading read) {
-        return readingRepository.create(read);
+
+        Vehicle vech = vehicleRepository.findOne(read.getVin());
+        if (vech == null) {
+            throw new NullPointerException();
+        }
+        read.setVech(vech);
+        readingRepository.create(read);
+        alertService.checkForAlerts(read);
+        return read;
     }
 
     @Transactional

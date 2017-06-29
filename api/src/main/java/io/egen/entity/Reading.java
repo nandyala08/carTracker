@@ -3,10 +3,12 @@ package io.egen.entity;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.sql.Timestamp;
+import java.util.UUID;
 
 
 @Entity
@@ -15,10 +17,48 @@ import java.sql.Timestamp;
 })
 public class Reading {
     @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Integer rin;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vin", nullable = false)
+    private Vehicle vech;
+
+    public Integer getRin() {
+        return rin;
+    }
+
+    public void setRin(Integer rin) {
+        this.rin = rin;
+    }
+
+    public Vehicle getVech() {
+        return vech;
+    }
+
+    public void setVech(Vehicle vech) {
+        this.vech = vech;
+    }
+
+    @Transient
     private String vin;
+
     private double latitude;
     private double longitude;
+
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+
     private Timestamp timestamp;
+
+
+
     private double fuelVolume;
     private int speed;
     private int engineHp;
@@ -30,15 +70,7 @@ public class Reading {
     @Embedded
     private Tires tires;
 
-    public String getVin() {
-        return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
-    }
-
-    public double getLatitude() {
+   public double getLatitude() {
         return latitude;
     }
 
@@ -124,5 +156,25 @@ public class Reading {
 
     public void setTires(Tires tires) {
         this.tires = tires;
+    }
+
+    @Override
+    public String toString() {
+        return "Reading{" +
+                "rin=" + rin +
+                ", vech=" + vech +
+                ", vin='" + vin + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", timestamp=" + timestamp +
+                ", fuelVolume=" + fuelVolume +
+                ", speed=" + speed +
+                ", engineHp=" + engineHp +
+                ", checkEngineLightOn=" + checkEngineLightOn +
+                ", engineCoolantLow=" + engineCoolantLow +
+                ", cruiseControlOn=" + cruiseControlOn +
+                ", engineRpm=" + engineRpm +
+                ", tires=" + tires +
+                '}';
     }
 }

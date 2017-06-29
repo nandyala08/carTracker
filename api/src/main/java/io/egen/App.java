@@ -13,8 +13,8 @@ public class App extends WebMvcConfigurerAdapter{
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**/*")
-                .allowedOrigins("http://mocker.egen.io").allowedMethods( "PUT","GET", "OPTIONS", "POST","DELETE")
+        registry.addMapping("/api/*")
+                .allowedOrigins("*").allowedMethods( "PUT", "POST", "GET", "OPTIONS","DELETE")
                 .allowedHeaders("header1", "header2","header3")
                 .exposedHeaders("header1","header2")
                 .allowCredentials(false).maxAge(3600);
