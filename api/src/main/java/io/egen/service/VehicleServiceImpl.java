@@ -10,18 +10,19 @@ package io.egen.service;
         import org.springframework.transaction.annotation.Transactional;
 
         import java.util.List;
-
+//---------------Implementation of Vehicle Service Interface------------//
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     VehicleRepository repository;
-
+    //-----Method to find all vehicles-------//
     @Transactional(readOnly = true)
     public List<Vehicle> findAll() {
         return repository.findAll();
     }
 
+    //-----Method to find one vehicle-------//
     @Transactional(readOnly = true)
     public Vehicle findOne(String vin) {
         Vehicle existing = repository.findOne(vin);
@@ -31,8 +32,7 @@ public class VehicleServiceImpl implements VehicleService {
         return existing;
     }
 
-
-
+    //-----Method to create vehicles-------//
     @Transactional
     public Vehicle create(Vehicle veh) {
         Vehicle existing = repository.findByModel(veh.getModel());
@@ -41,6 +41,8 @@ public class VehicleServiceImpl implements VehicleService {
         }
         return repository.create(veh);
     }
+
+    //-----Method to update a vehicle-------//
     @Transactional
     public Vehicle update(Vehicle veh) {
         Vehicle existing = repository.findOne(veh.getVin());
@@ -49,12 +51,6 @@ public class VehicleServiceImpl implements VehicleService {
         }
         return repository.update(veh);
     }
-    @Transactional
-    public void delete(String vin) {
-        Vehicle existing = repository.findOne(vin);
-        if (existing == null) {
-            throw new ResourceNotFound("Vehicle with vin "+vin+ " does not exist");
-        }
-      repository.delete(existing);
-    }
+
+
 }

@@ -5,7 +5,7 @@ import io.egen.entity.Reading;
 
 
 import java.util.List;
-
+//--------An interface for Reading Repository---------//
 public interface ReadingRepository {
     List<Reading> findAll();
 

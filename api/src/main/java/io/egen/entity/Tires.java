@@ -2,7 +2,7 @@ package io.egen.entity;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
+@Embeddable // To map tires data into readings data
 public class Tires {
     private int frontLeft;
     private int frontRight;

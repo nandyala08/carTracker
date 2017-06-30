@@ -3,7 +3,7 @@ package io.egen.repository;
 import io.egen.entity.Vehicle;
 
 import java.util.List;
-
+//-------An Interface for Vehicle Repository----------//
 public interface VehicleRepository {
     List<Vehicle> findAll();
 
@@ -14,8 +14,6 @@ public interface VehicleRepository {
     Vehicle create(Vehicle veh);
 
     Vehicle update(Vehicle veh);
-
-    void delete(Vehicle veh);
 
 
 }

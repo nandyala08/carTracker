@@ -3,7 +3,7 @@ package io.egen.entity;
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
+//-------- An entity for Alerts -------//
 @Entity
 public class Alert {
 
@@ -11,11 +11,13 @@ public class Alert {
         this.read = reading;
         this.priority = prior;
     }
+
+    //--- Mapping Many to alerts to One Reading, joining using rin number of readings data-----///
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rin", nullable = false)
     private Reading read;
 
-    @Id
+    @Id // Making alertId a Primary Key and generating integral values for alerts
     @GeneratedValue(strategy = IDENTITY)
     private Integer alertId;
 

@@ -1,26 +1,21 @@
 package io.egen.entity;
-
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-
 import javax.persistence.*;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import java.sql.Timestamp;
-import java.util.UUID;
 
+//-----------An entity for Reading data -----------//
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Reading.findAll",query = "select read from Reading read"),
+        @NamedQuery(name = "Reading.findAll",query = "select read from Reading read"), //Query to find all readings data
 })
 public class Reading {
-    @Id
+    @Id // Making rin a Primary key and generating integer values
     @GeneratedValue(strategy = IDENTITY)
     private Integer rin;
-
-
+//----- Mapping Many readings To One vehicle and joining it using vin number ----//
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vin", nullable = false)
     private Vehicle vech;
@@ -41,7 +36,7 @@ public class Reading {
         this.vech = vech;
     }
 
-    @Transient
+    @Transient // Making vin transient for not making it visible in database
     private String vin;
 
     private double latitude;
@@ -56,9 +51,6 @@ public class Reading {
     }
 
     private Timestamp timestamp;
-
-
-
     private double fuelVolume;
     private int speed;
     private int engineHp;
@@ -67,7 +59,7 @@ public class Reading {
     private boolean cruiseControlOn;
     private int engineRpm;
 
-    @Embedded
+    @Embedded // Embedding tires data into readings data
     private Tires tires;
 
    public double getLatitude() {

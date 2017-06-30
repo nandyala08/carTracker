@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import java.util.List;
-
+//-----------Controller for Vehicle------------//
+//Annotating to overcome CORS issue
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/vehicles")
@@ -23,25 +24,30 @@ public class VehicleController {
     @Autowired
     VehicleService service;
 
+    // CRUD operation- GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Vehicle> findAll() {
-        System.out.println("CAME HERE11111111111!!!!!!!!!!!!!!!!!");
+        System.out.println("Displaying all the data from vehicles");
         return service.findAll();
     }
 
+    //CRUD operation- GET
     @RequestMapping(method = RequestMethod.GET, value = "/{vin}",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Vehicle findOne(@PathVariable("vin") String vehId) {
-        System.out.println("CAME HERE222222222222222!!!!!!!!!!!!!!!!!");
+        System.out.println("Displaying a single vehicle by its vin number");
         return service.findOne(vehId);
     }
 
+    //CRUD operation- POST
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Vehicle create(@RequestBody Vehicle veh) {
+        System.out.println("Creating vehicles data");
         return service.create(veh);
     }
 
+    //CRUD operation- PUT (Insert/update)
     @RequestMapping(method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -53,8 +59,5 @@ public class VehicleController {
 
         return "";
     }
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{vin}")
-    public void delete(@PathVariable("vin") String vehId) {
-        service.delete(vehId);
-    }
+
 }

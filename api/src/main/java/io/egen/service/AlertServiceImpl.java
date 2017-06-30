@@ -7,18 +7,18 @@ import io.egen.entity.Vehicle;
 import io.egen.repository.AlertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//-----------Implementation of Alert Service interface-------------//
 @Service
 public class AlertServiceImpl implements AlertService {
 
     @Autowired
     AlertRepository alertRepository;
 
-
+    //-----Method to check for Alerts-------//
     public void checkForAlerts(Reading readings) {
         Alert alert = null;
         Vehicle vech = readings.getVech();
-
+        //Rules---->
         if(readings.getEngineRpm() > vech.getRedlineRpm())
         {
             alert = new Alert(readings, "HIGH");
@@ -32,9 +32,9 @@ public class AlertServiceImpl implements AlertService {
 
         if(alert != null)
             alertRepository.create(alert);
-
     }
 
+    //Conditions to check tire pressure----->
     private boolean checkTirePressure(Tires tires) {
         if(tires.getFrontLeft()<32 || tires.getFrontLeft() > 36)
             return true;

@@ -1,21 +1,18 @@
 package io.egen.entity;
-
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import java.sql.Timestamp;
-
+// -----------An entity for vehicle data -------------//
 @Entity
 @Table(name = "Vehicle")
 @NamedQueries({
-        @NamedQuery(name = "Vehicle.findAll",query = "select veh from Vehicle veh"),
-        @NamedQuery(name = "Vehicle.findByModel",query = "select veh from Vehicle veh where veh.model=:paramModel")
+        @NamedQuery(name = "Vehicle.findAll",query = "select veh from Vehicle veh"),  //Query to find all vehicles
+        @NamedQuery(name = "Vehicle.findByModel",query = "select veh from Vehicle veh where veh.model=:paramModel") //Query to find a vehicle by its model
 }
 )
 public class Vehicle {
-    @Id
+    @Id  // Making vin a Primary key
     private String vin;
     private String make;
     private String model;
