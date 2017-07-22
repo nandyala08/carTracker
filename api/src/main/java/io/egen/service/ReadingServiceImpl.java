@@ -22,12 +22,28 @@ public class ReadingServiceImpl implements ReadingService{
     @Autowired
     AlertService alertService;
 
+    @Autowired
+    GeoLocationService geoLocationService;
+
     //-----Method to find all readings-------//
     @Transactional(readOnly = true)
     public List<Reading> findAll() {
 
-            return readingRepository.findAll();
+            List<Reading> readings = readingRepository.findAll();
+            for(Reading r : readings)
+            {
+                r.setVin(r.getVech().getVin());
+            }
+            return readings;
     }
+
+//    public List<Reading> findGeo() {
+//        List<Reading> existing = readingRepository.findGeo();
+//        if(existing==null){
+//            throw new BadRequest(" does not exist");
+//        }
+//        return existing;
+//    }
 
     //-----Method to find a reading-------//
     @Transactional(readOnly = true)
@@ -38,6 +54,10 @@ public class ReadingServiceImpl implements ReadingService{
         }
         return existing;
     }
+    @Transactional(readOnly = true)
+    public List<Reading> findByVechId(String VechId) {
+        return readingRepository.findByVechId(VechId);
+    }
 
     //-----Method to create readings-------//
     @Transactional
@@ -47,8 +67,11 @@ public class ReadingServiceImpl implements ReadingService{
             throw new NullPointerException();
         }
         read.setVech(vech);
+        //Reading reads =new Reading(read.getVech().getVin());
+        read.setVechId(read.getVech().getVin());
         readingRepository.create(read);
         alertService.checkForAlerts(read);
+        geoLocationService.create(read);
         return read;
     }
 

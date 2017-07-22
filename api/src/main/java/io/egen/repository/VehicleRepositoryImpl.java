@@ -1,7 +1,11 @@
 package io.egen.repository;
 
 import io.egen.entity.Vehicle;
+
+
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +17,9 @@ import java.util.List;
 public class VehicleRepositoryImpl implements VehicleRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
+//    @Autowired
+//    private HibernateTemplate hibernateTemplate;
 
     //-----Method to find all vehicles-------//
     public List<Vehicle> findAll() {

@@ -1,4 +1,6 @@
 package io.egen.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.sql.Timestamp;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Reading.findAll",query = "select read from Reading read"), //Query to find all readings data
+        @NamedQuery(name = "Reading.findByVechId",query = "select read from Reading read where read.VechId=:paramVechId")
+       // @NamedQuery(name= "Reading.findGeo",query ="select r.latitude,r.longitude, v.vin from Reading as r, Vehicle as v  where r.timestamp >(current_timestamp-30) " )
 })
 public class Reading {
     @Id // Making rin a Primary key and generating integer values
@@ -18,7 +22,22 @@ public class Reading {
 //----- Mapping Many readings To One vehicle and joining it using vin number ----//
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vin", nullable = false)
+    @JsonIgnore
     private Vehicle vech;
+
+    private String VechId;
+
+    public String getVechId() {
+        return VechId;
+    }
+
+    public void setVechId(String vechId) {
+        VechId = vechId;
+    }
+
+//    public Reading(String VechId){
+//        this.VechId=VechId;
+//    }
 
     public Integer getRin() {
         return rin;

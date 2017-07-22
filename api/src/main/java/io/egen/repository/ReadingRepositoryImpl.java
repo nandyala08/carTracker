@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public class ReadingRepositoryImpl implements ReadingRepository {
 
+
     @Autowired
     AlertService alertService;
     @PersistenceContext
@@ -22,6 +23,24 @@ public class ReadingRepositoryImpl implements ReadingRepository {
         TypedQuery<Reading> query = entityManager.createNamedQuery("Reading.findAll", Reading.class);
         return query.getResultList();
     }
+
+
+
+    public List<Reading> findByVechId(String VechId) {
+        TypedQuery<Reading> query = entityManager.createNamedQuery("Reading.findByVechId", Reading.class);
+        query.setParameter("paramVechId", VechId);
+        List<Reading> resutList = query.getResultList();
+        if(resutList!= null){
+            return resutList;
+        }
+        else {
+            return null;
+        }
+    }
+//    public List<Reading> findGeo() {
+//        TypedQuery<Reading> query = entityManager.createNamedQuery("Reading.findGeo", Reading.class);
+//        return query.getResultList();
+//    }
 
     //-----Method to find a reading-------//
     public Reading findOne(String vin) {

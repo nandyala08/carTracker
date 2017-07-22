@@ -1,6 +1,7 @@
 
 package io.egen.service;
 
+      //  import io.egen.ViewObject.AlertsVO;
         import io.egen.entity.Vehicle;
         import io.egen.exception.BadRequest;
         import io.egen.exception.ResourceNotFound;
@@ -51,6 +52,5 @@ public class VehicleServiceImpl implements VehicleService {
         }
         return repository.update(veh);
     }
-
 
 }

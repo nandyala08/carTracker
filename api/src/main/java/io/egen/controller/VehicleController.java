@@ -1,6 +1,12 @@
 package io.egen.controller;
 
+//import io.egen.ViewObject.AlertsVO;
+import io.egen.entity.Alert;
+//import io.egen.entity.HighAlert;
+import io.egen.entity.GeoLocation;
 import io.egen.entity.Vehicle;
+import io.egen.service.AlertService;
+import io.egen.service.GeoLocationService;
 import io.egen.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,12 +30,58 @@ public class VehicleController {
     @Autowired
     VehicleService service;
 
+    @Autowired
+    AlertService alertService;
+
+    @Autowired
+    GeoLocationService geoLocationService;
+
+
+
     // CRUD operation- GET
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Vehicle> findAll() {
         System.out.println("Displaying all the data from vehicles");
         return service.findAll();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/alerts",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Alert> getAlerts() {
+        System.out.println("Displaying a single vehicle by its vin number");
+        return alertService.getAlerts();
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/alerts/{vin}",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Alert> findByVin(@PathVariable("vin") String vehId) {
+        System.out.println("Displaying a single vehicle by its vin number");
+        return alertService.findByVin(vehId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/geo",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<GeoLocation> getGeo() {
+        System.out.println("Displaying a single vehicle by its vin number");
+        return geoLocationService.getGeo();
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/geo/{vin}",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<GeoLocation> findGeo(@PathVariable("vin") String vehId) {
+        System.out.println("Displaying a single vehicle by its vin number");
+        return geoLocationService.findGeo(vehId);
+    }
+
+
+//    @RequestMapping(method = RequestMethod.GET, value = "/alerts/high",
+//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    public List<HighAlert> getHighAlerts() {
+//        System.out.println("Displaying a single vehicle by its vin number");
+//        return alertService.getHighAlerts();
+//    }
 
     //CRUD operation- GET
     @RequestMapping(method = RequestMethod.GET, value = "/{vin}",

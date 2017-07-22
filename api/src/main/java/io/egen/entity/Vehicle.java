@@ -21,6 +21,8 @@ public class Vehicle {
     private int maxFuelVolume;
     private Timestamp lastServiceDate;
 
+
+
     public String getVin() {
         return vin;
     }

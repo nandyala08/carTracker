@@ -1,5 +1,6 @@
 package io.egen.controller;
 
+import io.egen.entity.GeoLocation;
 import io.egen.entity.Reading;
 import io.egen.repository.AlertRepository;
 import io.egen.service.ReadingService;
@@ -24,6 +25,20 @@ public class ReadingController {
        System.out.println("-----------etching all the data from readings-------");
         return readingService.findAll();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{VechId}",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Reading> findByVin(@PathVariable("VechId") String vehId) {
+        System.out.println("Displaying a single vehicle by its vin number");
+        return readingService.findByVechId(vehId);
+    }
+
+//    @RequestMapping(method = RequestMethod.GET, value = "/geo",
+//            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//    public List<Reading> findGeo() {
+//        System.out.println("Displaying a single vehicle by its vin number");
+//        return readingService.findGeo();
+//    }
     //CRUD operation- POST
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.TEXT_HTML_VALUE)

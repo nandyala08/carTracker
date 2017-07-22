@@ -9,6 +9,8 @@ import java.util.List;
 public interface ReadingService {
     List<Reading> findAll();
 
+    List<Reading> findByVechId(String VechId);
+
     Reading findOne(String vin);
 
    Reading create(Reading read);

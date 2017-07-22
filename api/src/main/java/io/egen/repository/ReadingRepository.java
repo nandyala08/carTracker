@@ -9,6 +9,8 @@ import java.util.List;
 public interface ReadingRepository {
     List<Reading> findAll();
 
+    List<Reading> findByVechId(String vin);
+
     Reading findOne(String vin);
 
     //Reading findByModel(String model);
