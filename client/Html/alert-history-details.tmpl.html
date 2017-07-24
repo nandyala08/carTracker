@@ -1,0 +1,25 @@
+
+
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-8">
+
+<h3>Below are the list of all historical alerts of your selected vehicle</h3>
+     
+<table class = "table table-bordered">
+            <thead class="thead-inverse">
+                <th> All historical Alerts </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="veh in VhAlertVm.alert">
+        <td> {{ veh.priority}}
+            </td>
+        </tr>
+    </tbody>
+            </table>              
+
+        </div>
+    </div>
+</div>
+
