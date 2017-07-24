@@ -10,7 +10,7 @@
     alertController.$inject=['trackerService'];
 
     function alertController(trackerService){
-        console.log("Came here to controller");
+        
           
    
     
