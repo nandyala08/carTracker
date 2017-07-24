@@ -1,0 +1,27 @@
+
+
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-8">
+<h3>View each vehicle's graph based on your selected feature for your selected time range!!</h3>
+<h4>Please click on the vehicle's Model to view the graph</h4>
+
+            
+            
+                        
+<table class = "table table-bordered">
+            <thead class="thead-inverse">
+                <th> Vin </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="veh in plotVinVm.plot">
+        <td> <a ng-href="#!/plots/{{veh.vin}}">{{veh.model}}</a>
+            </td>
+        </tr>
+    </tbody>
+            </table>   
+            
+        </div>
+    </div>
+</div>
