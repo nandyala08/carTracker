@@ -1,0 +1,30 @@
+
+
+
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-8">
+<h3> We help you to track any vehicle's geolocation over the past 30 minutes!!</h3>
+
+<h4>If you would like to view the location please click on your favourite vehicle's VIN number</h4>
+            
+            
+<table class = "table table-bordered">
+            <thead class="thead-inverse">
+                <th> Vin </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="locate in locateVm.geo">
+        <td> <a ng-href="#!/location/{{locate.vin}}">{{locate.vin}}</a>
+            </td>
+        </tr>
+    </tbody>
+            </table>            
+
+
+
+        </div>
+    </div>
+</div>
+ 
