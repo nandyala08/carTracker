@@ -1,0 +1,24 @@
+
+
+<div class = "container">
+    <div class="row">
+<div class="col-xs-10">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Number of High ALerts for Each Vehicle</h3>
+                    </div>
+                    <div class="panel-body"  ng-repeat="veh in hAlertVm.highAlerts| orderBy:'-count'">
+
+                        <dl class="dl-horizontal">
+                            <dt class="a">Vehicle Vin:</dt>
+                            <dd class="b">{{veh.vin}}</dd>
+                            <dt class="a">Number of high Alerts!! :</dt>
+                            <dd class="b">{{veh.count}}</dd>
+
+                       </dl>
+                    </div>
+             </div>
+ </div>
+    </div>
+</div>
+

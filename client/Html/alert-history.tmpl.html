@@ -1,0 +1,25 @@
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-8">
+
+
+<h3> To check a vehicle's alert history, click on the vehicle model</h3>
+
+
+
+                         
+<table class = "table table-bordered">
+            <thead class="thead-inverse">
+                <th> Vin </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="veh in alertVm.alerts">
+        <td> <a ng-href="#!/vehicles/alerts/{{veh.vin}}">{{veh.model}}</a>
+            </td>
+        </tr>
+    </tbody>
+            </table>   
+        </div>
+    </div>
+</div>

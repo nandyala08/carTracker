@@ -1,0 +1,30 @@
+
+
+
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-8">
+
+
+<div ng-controller ="plotController as plotVm" >
+
+  
+
+<h4>Select the specific feature 
+<select ng-model="selectedName" id = "selectedName" name = "selectedName" ng-options="item for item in type" class ="form-control">
+</select></h4>
+
+    <h4>Select the time(minutes) from the dropdown
+<select ng-model="selectedTime" id = "selectedTime" name = "selectedTime" ng-options="item for item in time" ng-change="setSelected()" class ="form-control">
+</select></h4>
+
+
+<zingchart id = "myChart" zc-height = 500 zc-width = 600  zc-json = "myJson">
+  
+</zingchart>
+
+</div>
+        </div>
+    </div>
+</div>
